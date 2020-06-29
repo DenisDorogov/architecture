@@ -12,7 +12,7 @@ class PostgreSQLFactory  extends AbstractDBMS
     public function createQuery() {
         return new DBQueryBuilder();
     }
-    
+
     public function recordData() {
         return new DBRecord();
     }
