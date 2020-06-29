@@ -10,6 +10,6 @@ class DBConnection extends AbstractDBComponent
             $configConnect['db_pass'],
             $configConnect['db_name']
         );
-        return $mysqli
+        return $mysqli;
     }
 }
