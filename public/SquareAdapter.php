@@ -9,7 +9,7 @@ class SquareAdapter implements ISquare
         $this->square = $square;
     }
 
-    function squareArea(float $sideSquare)
+    function squareArea(int $sideSquare)
     {
         $diagonal = sqrt($sideSquare**2*2);
         echo "diag = $diagonal <br>";

@@ -14,13 +14,15 @@ spl_autoload_register(function ($classname) {
 
 
 // 2 задание.
-$sideSquare = 1.0;
+echo "Квадрат ------<br>";
+$sideSquare = 1;
 $squareAdapter = new SquareAdapter(new SquareAreaLib());
 echo "a = $sideSquare <br>";
 echo "S = {$squareAdapter->squareArea($sideSquare)} <br>";
-
+echo "Круг ----------<br>";
 $perimeter = 3.14;
 $circleAdapter = new CircleAdapter(new CircleAreaLib());
 echo "P = $perimeter <br>";
 echo "S circle = {$circleAdapter->circleArea($perimeter)} <br>";
+
 

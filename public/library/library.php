@@ -1,7 +1,7 @@
 <?php
 class CircleAreaLib
 {
-    public function getCircleArea(int $diagonal)
+    public function getCircleArea(float $diagonal)
     {
         $area = (M_PI * $diagonal**2)/4;
 
@@ -11,7 +11,7 @@ class CircleAreaLib
 
 class SquareAreaLib
 {
-    public function getSquareArea(int $diagonal)
+    public function getSquareArea(float $diagonal)
     {
         $area = ($diagonal**2)/2;
         echo "area = $area <br>";
