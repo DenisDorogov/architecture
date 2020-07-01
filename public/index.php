@@ -1,5 +1,5 @@
 <?php
-
+require ('library/library.php');
 spl_autoload_register(function ($classname) {
     require_once ($classname.'.php');
 });
@@ -14,4 +14,13 @@ spl_autoload_register(function ($classname) {
 
 
 // 2 задание.
+$sideSquare = 1.0;
+$squareAdapter = new SquareAdapter(new SquareAreaLib());
+echo "a = $sideSquare <br>";
+echo "S = {$squareAdapter->squareArea($sideSquare)} <br>";
+
+$perimeter = 3.14;
+$circleAdapter = new CircleAdapter(new CircleAreaLib());
+echo "P = $perimeter <br>";
+echo "S circle = {$circleAdapter->circleArea($perimeter)} <br>";
 

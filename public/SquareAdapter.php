@@ -1,11 +1,19 @@
 <?php
 
 
-class Square implements ISquare
+class SquareAdapter implements ISquare
 {
-    function squareArea(int $sideSquare)
+    private $square;
+    public function __construct(SquareAreaLib $square)
     {
-        // TODO: Implement squareArea() method.
+        $this->square = $square;
+    }
+
+    function squareArea(float $sideSquare)
+    {
+        $diagonal = sqrt($sideSquare**2*2);
+        echo "diag = $diagonal <br>";
+        return $this->square->getSquareArea($diagonal);
     }
 
 }
