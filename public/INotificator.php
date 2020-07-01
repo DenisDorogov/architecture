@@ -1,7 +1,7 @@
 <?php
 
 
-interface Notificator
+interface INotificator
 {
     public function sendMessage();
 }

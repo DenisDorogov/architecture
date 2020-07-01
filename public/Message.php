@@ -1,21 +1,22 @@
 <?php
 
 
-class MessageEmail implements INotificator
+class Message implements INotificator
 {
     private $text;
 
-    public function __construct(INotificator $textObj)
+    public function __construct($text)
     {
-        $this->text = $textObj->text;
+        $this->text = $text;
     }
 
-    public function sendEmail($text) {
-
+    public function __get($text)
+    {
+        return $this->text;
     }
 
     public function sendMessage()
     {
-
+        echo "Текст сообщения: $this->text".PHP_EOL;
     }
 }
