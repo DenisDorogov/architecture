@@ -7,7 +7,7 @@ class EditCommand extends Command
     private $logFile = LOG_FILE;
     private Editor $editor;
 
-    public function __construct($file = WORK_FILE, Editor $editor )
+    public function __construct(Editor $editor, $file = WORK_FILE )
     {
         $this->file = $file; //new SplFileObject($file);
         $this->editor = $editor;
@@ -19,15 +19,15 @@ class EditCommand extends Command
         $this->logCommand('Вырезка текста с позиции: ' . $start);
     }
 
-    public function pasteText($data, int $start)
+    public function pasteText(string $data, int $start)
     {
         $this->editor->paste($this->file, $data, $start);
-        $this->logCommand('Вставка текста: ' . $data)
+        $this->logCommand('Вставка текста: ' . $data);
     }
 
     public function logCommand(string $data)
     {
         $file = new SplFileObject('log.txt', 'a');
-        $file->fwrite('d-m-Y H:i:s' . 'Произведена команда: ' . $data);
+        $file->fwrite(date('d-m-Y H:i:s') . 'Произведена команда: ' . $data . "\r\n");
     }
 }
