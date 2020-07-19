@@ -4,9 +4,7 @@ spl_autoload_register(function ($classname) {
     require_once ($classname.'.php');
 });
 
-function test()
-{
+$command = new EditCommand(new Editor());
 
-}
-
-test();
+//$command->pasteText('test' , 0);
+$command->cutText(1 , 3);
