@@ -16,7 +16,7 @@ class EditCommand extends Command
     public function cutText(int $start, int $stop)
     {
         $this->editor->cut($this->file, $start, $stop);
-        $this->logCommand('Вырезка текста с позиции: ' . $start);
+        $this->logCommand('Вырезка текста с позиции: ' . $start . ' до позиции ' . $stop);
     }
 
     public function pasteText(string $data, int $start)
@@ -28,6 +28,7 @@ class EditCommand extends Command
     public function logCommand(string $data)
     {
         $file = new SplFileObject('log.txt', 'a');
-        $file->fwrite(date('d-m-Y H:i:s') . 'Произведена команда: ' . $data . "\r\n");
+        $file->fwrite(date('d-m-Y H:i:s') . ' Произведена команда: ' . $data . "\r\n");
+        echo date('d-m-Y H:i:s') . ' Произведена команда: ' . $data . "\r\n" . PHP_EOL;
     }
 }
