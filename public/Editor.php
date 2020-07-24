@@ -14,7 +14,10 @@ class Editor
 
     public function paste($file, $data, $start): void
     {   $temp = file_get_contents($file);
+//        echo "Вставлена строка: $temp" . PHP_EOL;
         $temp = substr_replace($temp, $data, $start, 0);
-        file_put_contents($file, $temp, $start);
+//        echo "Вставлена строка: $temp" . PHP_EOL;
+        file_put_contents($file, $temp, 0);
+//        echo "Вставлена строка: $temp" . PHP_EOL;
     }
 }
