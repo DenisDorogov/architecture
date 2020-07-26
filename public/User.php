@@ -6,52 +6,53 @@ class User
     private $commands = [];
     private $current = 0;
     private $buffer = [];
-    private $reverseCommand = [
-        'cutText' => 'pasteText',
-        'pasteText' => 'cutText'
-    ];
+//    private $reverseCommand = [
+//        'cut' => 'paste',
+//        'paste' => 'cut'
+//    ];
 
     public function __construct()
     {
         $this->editor = new Editor();
     }
 
-    public function runCommand($type, $start, $value = null) {
-        echo "Поступила команда: $type $start $value".PHP_EOL;
-        $command = new EditCommand($this->editor); //Добавить сюда.
+    public function runCommand($type, $start = null, $value = null) {
+        echo PHP_EOL . "Поступила команда: '$type' / $start / $value".PHP_EOL;
+        $command = new EditCommand($this->editor);
 
         switch ($type) {
             case 'cut':
-                $this->buffer[] = $command->cutText($start, $value);
-                $this->commands[] ='cut';
+                $buffer = $command->cutText($start, $value);
+                $this->commands[$this->current] =['paste', $start, $buffer];
+                echo "current commands " . ($this->current) . " -  " . $this->commands[$this->current][0] . '/' . $this->commands[$this->current][1] . '/' . $this->commands[$this->current][2] . PHP_EOL;
+                $this->current++;
                 break;
             case 'paste':
-//                echo '$this->buffer = ' . end($this->buffer) . PHP_EOL;
-//                var_dump($this->buffer);
-                $command->pasteText( end($this->buffer), $start);
-                $this->commands[] ='paste';
+                if ($value === null) {
+                    $string = $this->commands[$this->current - 1][2];
+                } else {
+                    $string = $value;
+                }
+                $command->pasteText( $string, $start);
+                $this->commands[$this->current] =['cut', $start, $start + strlen($string)];
+                echo "current commands " . ($this->current) . " -  " . $this->commands[$this->current][0] . '/' . $this->commands[$this->current][1] . '/' . $this->commands[$this->current][2] . PHP_EOL;
+                $this->current++;
                 break;
             case 'undo':
-                $this->runCommand($this->commands[--$this->current], ); //Дописать параметры. Нужно сохрянять еще и позиции удаления и вставки.
+                --$this->current;
+                $this->runCommand(
+                    $this->commands[$this->current][0],
+                    $this->commands[$this->current][1],
+                    $this->commands[$this->current][2]
+                );
+                --$this->current;
+                array_pop($this->commands);
+                break;
+            case 'redo':
+                if ($this->current < count($this->commands) - 1) {
 
+                }
                 break;
         }
-        var_dump($this->commands);
-//        $this->commands[] = $command; //Не учитывается параметры команды
-        $this->current++;
     }
-
-//    public function down(int $levels) //Отменить количество операций
-//    {
-//        echo "Отменить $levels операций".PHP_EOL;
-//        for ($i = 0; $i < $levels; $i++)
-//        {
-//            if($this->current > 0){
-//                $this->commands[--$this->current]->unExecute();
-//            }
-//        }
-//
-//    }
-
-    //TODO Дописать
 }
