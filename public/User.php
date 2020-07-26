@@ -5,11 +5,6 @@ class User
     protected $editor;
     private $commands = [];
     private $current = 0;
-    private $buffer = [];
-//    private $reverseCommand = [
-//        'cut' => 'paste',
-//        'paste' => 'cut'
-//    ];
 
     public function __construct()
     {
@@ -39,18 +34,23 @@ class User
                 $this->current++;
                 break;
             case 'undo':
-                --$this->current;
-                $this->runCommand(
-                    $this->commands[$this->current][0],
-                    $this->commands[$this->current][1],
-                    $this->commands[$this->current][2]
-                );
-                --$this->current;
-                array_pop($this->commands);
+                if ($this->current > 0) {
+                    --$this->current;
+                    $this->runCommand(
+                        $this->commands[$this->current][0],
+                        $this->commands[$this->current][1],
+                        $this->commands[$this->current][2]
+                    );
+                    --$this->current;
+                }
                 break;
             case 'redo':
-                if ($this->current < count($this->commands) - 1) {
-
+                if ($this->current <= count($this->commands) - 1) {
+                    $this->runCommand(
+                        $this->commands[$this->current][0],
+                        $this->commands[$this->current][1],
+                        $this->commands[$this->current][2]
+                    );
                 }
                 break;
         }
