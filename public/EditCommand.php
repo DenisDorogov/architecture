@@ -31,7 +31,7 @@ class EditCommand extends Command
     {
         $file = new SplFileObject('log.txt', 'a');
         $file->fwrite(date('d-m-Y H:i:s') . ' Произведена команда: ' . $data . "\r\n");
-        echo date('d-m-Y H:i:s') . ' Произведена команда: ' . $data . "\r\n" . PHP_EOL;
+        echo date('d-m-Y H:i:s') . ' Произведена команда: ' . $data . PHP_EOL;
     }
 
     public function undo()
