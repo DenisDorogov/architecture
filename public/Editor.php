@@ -9,15 +9,14 @@ class Editor
         $buffer = substr($temp, $start, $stop - $start);
         $temp = substr_replace($temp, '', $start, $stop - $start);
         file_put_contents($file, $temp);
+        echo "Файл: $temp" . PHP_EOL;
         return $buffer;
     }
 
     public function paste($file, $data, $start): void
     {   $temp = file_get_contents($file);
-//        echo "Вставлена строка: $temp" . PHP_EOL;
         $temp = substr_replace($temp, $data, $start, 0);
-//        echo "Вставлена строка: $temp" . PHP_EOL;
         file_put_contents($file, $temp, 0);
-//        echo "Вставлена строка: $temp" . PHP_EOL;
+        echo "Файл: $temp" . PHP_EOL;
     }
 }
